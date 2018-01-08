@@ -20,54 +20,259 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "DEBUG: ";
-    Button button;
-    TextView messageViewVar;
-    TextView serverViewVar;
-    EditText pubEditVar;
-    EditText messageEditVar;
-    EditText subEditVar;
+    Button doitButton;
+    Button allOffButton;
+    Button allOnButton;
+    Button volumeUpButton;
+    Button volumeDownButton;
+    Button channelUpButton;
+    Button channelDownButton;
+    Button radioOnButton;
+    Button radioOffButton;
+    Button source3Button;
+    Button source2Button;
+    Button radioTvButton;
+    Button muteButton;
+    Button phoenixButton;
+    Button arteButton;
+    Button tagesschauButton;
+    Button dreiSatButton;
+    Button menuButton;
+    Button backButton;
+    Button reserveButton;
+    Button reserveZweiButton;
+    TextView messageView;
     final String serverUri = "tcp://raspi:1883";
     String clientId = "s4@uwxy.de";
     final String subscriptionTopic = "home/sensors/#";
-    String publishTopic = "home/test/test";
+    final String PUBLISH_TOPIC = "home/lirc/switch";
     final int QOS = 1;
     MqttAndroidClient mqttAndroidClient;
     boolean isConnected = false;
     boolean isMessageEmpty = true;
     boolean isSubscriptionEmpty = true;
     String myAboTopic = "";
+    String myPubString;
+    String myMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        messageViewVar = findViewById(R.id.messageView);
-        serverViewVar = findViewById(R.id.serverView);
-        pubEditVar = findViewById(R.id.pubEdit);
-        messageEditVar = findViewById(R.id.messageEdit);
-        subEditVar = findViewById(R.id.subEdit);
-        button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        doitButton = findViewById(R.id.button);
+        allOffButton = findViewById(R.id.allOffButton);
+        allOnButton =  findViewById(R.id.allOnButton);
+        volumeUpButton =  findViewById(R.id.volumeUpButton);
+        volumeDownButton =  findViewById(R.id.volumeDownButton);
+        channelUpButton =  findViewById(R.id.channelUpButton);
+        channelDownButton =  findViewById(R.id.channelDownButton);
+        radioOnButton =  findViewById(R.id.radioOnButton);
+        radioOffButton =  findViewById(R.id.radioOffButton);
+        source3Button =  findViewById(R.id.src3Button);
+        source2Button =  findViewById(R.id.src2Button);
+        radioTvButton =  findViewById(R.id.radioTvButton);
+        muteButton =  findViewById(R.id.muteButton);
+        phoenixButton =  findViewById(R.id.phoenixButton);
+        arteButton =  findViewById(R.id.arteButton);
+        tagesschauButton =  findViewById(R.id.tgsButton);
+        dreiSatButton =  findViewById(R.id.dreiSatButton);
+        menuButton =  findViewById(R.id.menuButton);
+        backButton =  findViewById(R.id.backButton);
+        reserveButton =  findViewById(R.id.reserveButton);
+        reserveZweiButton =  findViewById(R.id.reserveZweiButton);
+
+        messageView = findViewById(R.id.messageView);
+        doitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String myPubString = messageEditVar.getText().toString();
-
-            if(myPubString.equals("") || myPubString == null){
-                myPubString = "s4_test";
-            }
-            String myPublishTopic = pubEditVar.getText().toString();
-            if(myPublishTopic.equals("") || myPubString == null){
-                myPublishTopic = publishTopic;
-            }
-            myAboTopic = subEditVar.getText().toString();
-            if (!myAboTopic.equals("") && isConnected == true) {
-                subscribeToTopic(myAboTopic);
-            }
-            publishMessage(myPublishTopic, myPubString);
+            myPubString = getString(R.string.doitButton);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
             }
 
         });
+        allOffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.allOfMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        allOnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.allOnMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        volumeUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.volumeUpMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        volumeDownButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.volumeDownMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        channelUpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.channelUpMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        channelDownButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.channelDownMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        radioOnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.radioOnMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        radioOffButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.radioOffMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        radioTvButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.radioTvMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        source3Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.source3Mqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        source2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.source2Mqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.menuMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        muteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.muteMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.backMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        dreiSatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.dreiSatMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        phoenixButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.phoenixMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        tagesschauButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.tagesschauMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        arteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.arteMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        reserveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.reserveMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+        reserveZweiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            myPubString = getString(R.string.reserveZweiMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            }
+
+        });
+
 
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
@@ -95,8 +300,8 @@ public class MainActivity extends AppCompatActivity {
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 String incomingMessage = new String(message.getPayload());
                 addToHistory("Incoming message: " + topic + ": " + incomingMessage);
-                messageViewVar.setText("");
-                messageViewVar.setText(topic + ": " + incomingMessage);
+                myMessage = topic + ": " + incomingMessage;
+                messageView.setText(myMessage);
             }
 
             @Override
@@ -137,7 +342,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addToHistory (String string){
         //connectionHistory.add(string);
-        serverViewVar.setText(string);
+        //serverViewVar.setText(string);
         Log.e(TAG, string);
     }
 
