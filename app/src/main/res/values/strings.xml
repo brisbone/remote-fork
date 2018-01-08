@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">remote</string>
+    <string name="messageView">sub message</string>
+    <string name="messageEdit">pub message</string>
+    <string name="button">DOIT!</string>
+    <string name="serverView">server message</string>
+    <string name="subEdit">sub topic</string>
+    <string name="pubEdit">pub topic</string>
+    <string name="connected">connected</string>
+</resources>
