@@ -13,76 +13,239 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/button"
+        android:text="@string/doitButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <EditText
-        android:id="@+id/pubEdit"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/messageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/messageView"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioOffButton" />
+
+    <Button
+        android:id="@+id/allOffButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="@string/pubEdit"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/allOffButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/messageView"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/muteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/muteButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/volumeUpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/volumeUpButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allOffButton" />
+
+    <Button
+        android:id="@+id/src3Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/source3Button"
+        app:layout_constraintEnd_toStartOf="@+id/channelUpButton"
+        app:layout_constraintStart_toEndOf="@+id/volumeUpButton"
+        app:layout_constraintTop_toBottomOf="@+id/muteButton" />
+
+    <Button
+        android:id="@+id/channelUpButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/channelUpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allOnButton" />
+
+    <Button
+        android:id="@+id/volumeDownButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/messageView"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/volumeDownButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/serverView" />
+        app:layout_constraintTop_toBottomOf="@+id/volumeUpButton" />
 
-    <EditText
-        android:id="@+id/subEdit"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/src2Button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="17dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="43dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="@string/subEdit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/messageEdit" />
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/source2Button"
+        app:layout_constraintEnd_toStartOf="@+id/channelDownButton"
+        app:layout_constraintStart_toEndOf="@+id/volumeDownButton"
+        app:layout_constraintTop_toBottomOf="@+id/src3Button" />
 
-    <TextView
-        android:id="@+id/serverView"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/channelDownButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="174dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/channelDownButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/channelUpButton" />
+
+    <Button
+        android:id="@+id/dreiSatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@string/serverView"
-        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:text="@string/dreiSatButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volumeDownButton" />
+
+    <Button
+        android:id="@+id/tgsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/tagesschauButton"
+        app:layout_constraintEnd_toStartOf="@+id/arteButton"
+        app:layout_constraintStart_toEndOf="@+id/dreiSatButton"
+        app:layout_constraintTop_toBottomOf="@+id/src2Button" />
+
+    <Button
+        android:id="@+id/arteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/arteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/channelDownButton" />
+
+    <Button
+        android:id="@+id/phoenixButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/phoenixButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dreiSatButton" />
+
+    <Button
+        android:id="@+id/reserveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/reserveButton"
+        app:layout_constraintEnd_toStartOf="@+id/reserveZweiButton"
+        app:layout_constraintStart_toEndOf="@+id/phoenixButton"
+        app:layout_constraintTop_toBottomOf="@+id/tgsButton" />
+
+    <Button
+        android:id="@+id/reserveZweiButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/reserveZweiButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arteButton" />
+
+    <Button
+        android:id="@+id/radioOffButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/radioOffButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoenixButton" />
+
+    <Button
+        android:id="@+id/radioTvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/radioTvButton"
+        app:layout_constraintEnd_toStartOf="@+id/radioOnButton"
+        app:layout_constraintStart_toEndOf="@+id/radioOffButton"
+        app:layout_constraintTop_toBottomOf="@+id/reserveButton" />
+
+    <Button
+        android:id="@+id/radioOnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/radioOnButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reserveZweiButton" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/backButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/messageEdit"
-        android:layout_width="0dp"
+    <Button
+        android:id="@+id/menuButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="44dp"
+        android:text="@string/menuButton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/backButton" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <Button
+        android:id="@+id/allOnButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/messageEdit"
+        android:layout_marginTop="16dp"
+        android:text="@string/allOnButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pubEdit" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
