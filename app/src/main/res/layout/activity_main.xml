@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     tools:context="de.uwxy.remote.MainActivity"
     tools:layout_editor_absoluteY="81dp">
 
@@ -24,6 +25,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="@string/messageView"
+        android:textColor="?android:attr/colorButtonNormal"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioOffButton" />
@@ -34,9 +36,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:background="@android:drawable/ic_lock_power_off"
+        android:backgroundTintMode="src_atop"
         android:text="@string/allOffButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:backgroundTint="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/muteButton"
@@ -76,6 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_blue_bright"
         android:text="@string/channelUpButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allOnButton" />
@@ -108,6 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_blue_bright"
         android:text="@string/channelDownButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/channelUpButton" />
@@ -118,6 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/darker_gray"
         android:text="@string/dreiSatButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/volumeDownButton" />
@@ -193,6 +201,7 @@
         android:layout_marginEnd="44dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_orange_dark"
         android:text="@string/radioTvButton"
         app:layout_constraintEnd_toStartOf="@+id/radioOnButton"
         app:layout_constraintStart_toEndOf="@+id/radioOffButton"
@@ -243,6 +252,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/holo_green_light"
         android:text="@string/allOnButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
