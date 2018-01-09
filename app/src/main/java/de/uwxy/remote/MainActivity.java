@@ -1,12 +1,12 @@
 package de.uwxy.remote;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -19,41 +19,38 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "DEBUG: ";
-    Button doitButton;
-    Button allOffButton;
-    Button allOnButton;
-    Button volumeUpButton;
-    Button volumeDownButton;
-    Button channelUpButton;
-    Button channelDownButton;
-    Button radioOnButton;
-    Button radioOffButton;
-    Button source3Button;
-    Button source2Button;
-    Button radioTvButton;
-    Button muteButton;
-    Button phoenixButton;
-    Button arteButton;
-    Button tagesschauButton;
-    Button dreiSatButton;
-    Button menuButton;
-    Button backButton;
-    Button reserveButton;
-    Button reserveZweiButton;
-    TextView messageView;
-    final String serverUri = "tcp://raspi:1883";
-    String clientId = "s4@uwxy.de";
-    final String subscriptionTopic = "home/sensors/#";
-    final String PUBLISH_TOPIC = "home/lirc/switch";
-    final int QOS = 1;
-    MqttAndroidClient mqttAndroidClient;
-    boolean isConnected = false;
-    boolean isMessageEmpty = true;
-    boolean isSubscriptionEmpty = true;
-    String myAboTopic = "";
-    String myPubString;
-    String myMessage;
+    private static final String TAG = "DEBUG: ";
+    private Button doitButton;
+    private Button allOffButton;
+    private Button allOnButton;
+    private Button volumeUpButton;
+    private Button volumeDownButton;
+    private Button channelUpButton;
+    private Button channelDownButton;
+    private Button radioOnButton;
+    private Button radioOffButton;
+    private Button source3Button;
+    private Button source2Button;
+    private Button radioTvButton;
+    private Button muteButton;
+    private Button phoenixButton;
+    private Button arteButton;
+    private Button tagesschauButton;
+    private Button dreiSatButton;
+    private Button menuButton;
+    private Button backButton;
+    private Button reserveButton;
+    private Button reserveZweiButton;
+    private TextView messageView;
+    private final String serverUri = "tcp://raspi:1883";
+    private final String clientId = "s4@uwxy.de";
+    private final String PUBLISH_TOPIC = "home/lirc/switch";
+    private final int QOS = 1;
+    private MqttAndroidClient mqttAndroidClient;
+    private final String myAboTopic = "";
+    private String myPubString;
+    private final String ON_STRING = "ON";
+    private String myMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         doitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            myPubString = getString(R.string.doitButton);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            myPubString = getString(R.string.doitMqtt);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -97,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.allOfMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.allOnMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -115,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.volumeUpMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -124,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.volumeDownMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -133,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.channelUpMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -142,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.channelDownMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -151,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.radioOnMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -160,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.radioOffMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -169,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.radioTvMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -178,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.source3Mqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -187,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.source2Mqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -196,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.menuMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -205,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.muteMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -214,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.backMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -223,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.dreiSatMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -232,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.phoenixMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -241,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.tagesschauMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -250,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.arteMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -259,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.reserveMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -268,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             myPubString = getString(R.string.reserveZweiMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, myPubString);
+            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -321,13 +318,11 @@ public class MainActivity extends AppCompatActivity {
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    isConnected = true;
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     addToHistory("Failed to connect to: " + serverUri);
-                    isConnected = false;
                 }
             });
 
@@ -340,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void addToHistory (String string){
+    private void addToHistory(String string){
         //connectionHistory.add(string);
         //serverViewVar.setText(string);
         Log.e(TAG, string);
@@ -366,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void publishMessage(String topic, String messageString){
+    private void publishMessage(String topic, String messageString){
 
         try {
             MqttMessage message = new MqttMessage();
