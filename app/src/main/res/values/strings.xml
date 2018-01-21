@@ -43,4 +43,41 @@
     <string name="reserveButton">n/a</string>
     <string name="reserveZweiButton">n/a</string>
     <string name="messageView">message</string>
+    <string name="remote_xml">remote.xml</string>
+    <string name="upButton">^</string>
+    <string name="downButton">v</string>
+    <string name="leftButton"><![CDATA[<]]></string>
+    <string name="rightButton"><![CDATA[>]]></string>
+    <string name="guideButton">guide</string>
+
+    <string-array name="radio_stations">
+        <item>Radiosender</item>
+        <item>rockantenne</item>
+        <item>sunshine live</item>
+        <item>hr 3</item>
+        <item>antenne bayern</item>
+        <item>hr 2</item>
+        <item>hr 1</item>
+        <item>mdr jump</item>
+        <item>bayern 3</item>
+        <item>you fm</item>
+        <item>mdr sputnik</item>
+        <item>br klassik</item>
+        <item>br aktuell</item>
+        <item>hr 4</item>
+    </string-array>
+    <string-array name="tv_stations">
+        <item>TV Sender</item>
+        <item>Das Erste</item>
+        <item>ZDF</item>
+        <item>3sat</item>
+        <item>arte</item>
+        <item>phönix</item>
+        <item>tagesschau24</item>
+        <item>zdf info</item>
+        <item>ARD alpha</item>
+        <item>one</item>
+        <item>zdf neo</item>
+        <item>hr</item>
+        </string-array>
 </resources>

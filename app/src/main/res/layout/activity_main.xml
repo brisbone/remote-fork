@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
@@ -9,7 +10,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/xbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -18,30 +19,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/messageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/messageView"
-        android:textColor="?android:attr/colorButtonNormal"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioOffButton" />
-
     <Button
         android:id="@+id/allOffButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@android:drawable/ic_lock_power_off"
-        android:backgroundTintMode="src_atop"
+        android:backgroundTint="@android:color/holo_red_dark"
         android:text="@string/allOffButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:backgroundTint="@android:color/darker_gray" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/muteButton"
@@ -64,13 +51,13 @@
         app:layout_constraintTop_toBottomOf="@+id/allOffButton" />
 
     <Button
-        android:id="@+id/src3Button"
+        android:id="@+id/guideButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
-        android:text="@string/source3Button"
+        android:text="@string/guideButton"
         app:layout_constraintEnd_toStartOf="@+id/channelUpButton"
         app:layout_constraintStart_toEndOf="@+id/volumeUpButton"
         app:layout_constraintTop_toBottomOf="@+id/muteButton" />
@@ -97,16 +84,17 @@
         app:layout_constraintTop_toBottomOf="@+id/volumeUpButton" />
 
     <Button
-        android:id="@+id/src2Button"
+        android:id="@+id/upButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
-        android:text="@string/source2Button"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/upButton"
         app:layout_constraintEnd_toStartOf="@+id/channelDownButton"
         app:layout_constraintStart_toEndOf="@+id/volumeDownButton"
-        app:layout_constraintTop_toBottomOf="@+id/src3Button" />
+        app:layout_constraintTop_toBottomOf="@+id/guideButton" />
 
     <Button
         android:id="@+id/channelDownButton"
@@ -120,69 +108,71 @@
         app:layout_constraintTop_toBottomOf="@+id/channelUpButton" />
 
     <Button
-        android:id="@+id/dreiSatButton"
+        android:id="@+id/leftButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/darker_gray"
-        android:text="@string/dreiSatButton"
+        android:text="@string/leftButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/volumeDownButton" />
 
     <Button
-        android:id="@+id/tgsButton"
+        android:id="@+id/doitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
-        android:text="@string/tagesschauButton"
-        app:layout_constraintEnd_toStartOf="@+id/arteButton"
-        app:layout_constraintStart_toEndOf="@+id/dreiSatButton"
-        app:layout_constraintTop_toBottomOf="@+id/src2Button" />
+        android:text="@string/doitButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightButton"
+        app:layout_constraintStart_toEndOf="@+id/leftButton"
+        app:layout_constraintTop_toBottomOf="@+id/upButton" />
 
     <Button
-        android:id="@+id/arteButton"
+        android:id="@+id/rightButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/arteButton"
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/rightButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/channelDownButton" />
 
     <Button
-        android:id="@+id/phoenixButton"
+        android:id="@+id/source3Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/phoenixButton"
+        android:text="@string/source3Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dreiSatButton" />
+        app:layout_constraintTop_toBottomOf="@+id/leftButton" />
 
     <Button
-        android:id="@+id/reserveButton"
+        android:id="@+id/downButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="44dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="16dp"
-        android:text="@string/reserveButton"
-        app:layout_constraintEnd_toStartOf="@+id/reserveZweiButton"
-        app:layout_constraintStart_toEndOf="@+id/phoenixButton"
-        app:layout_constraintTop_toBottomOf="@+id/tgsButton" />
+        android:backgroundTint="@android:color/darker_gray"
+        android:text="@string/downButton"
+        app:layout_constraintEnd_toStartOf="@+id/source2Button"
+        app:layout_constraintStart_toEndOf="@+id/source3Button"
+        app:layout_constraintTop_toBottomOf="@+id/doitButton" />
 
     <Button
-        android:id="@+id/reserveZweiButton"
+        android:id="@+id/source2Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/reserveZweiButton"
+        android:text="@string/source2Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/arteButton" />
+        app:layout_constraintTop_toBottomOf="@+id/rightButton" />
 
     <Button
         android:id="@+id/radioOffButton"
@@ -192,7 +182,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/radioOffButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoenixButton" />
+        app:layout_constraintTop_toBottomOf="@+id/source3Button" />
 
     <Button
         android:id="@+id/radioTvButton"
@@ -205,7 +195,7 @@
         android:text="@string/radioTvButton"
         app:layout_constraintEnd_toStartOf="@+id/radioOnButton"
         app:layout_constraintStart_toEndOf="@+id/radioOffButton"
-        app:layout_constraintTop_toBottomOf="@+id/reserveButton" />
+        app:layout_constraintTop_toBottomOf="@+id/downButton" />
 
     <Button
         android:id="@+id/radioOnButton"
@@ -215,7 +205,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/radioOnButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reserveZweiButton" />
+        app:layout_constraintTop_toBottomOf="@+id/source2Button" />
 
     <Button
         android:id="@+id/backButton"
@@ -228,7 +218,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/menuButton"
+        android:id="@+id/cButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -236,7 +226,7 @@
         android:layout_marginStart="44dp"
         android:text="@string/menuButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/xbutton"
         app:layout_constraintStart_toEndOf="@+id/backButton" />
 
     <android.support.constraint.Guideline
@@ -256,6 +246,24 @@
         android:text="@string/allOnButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/tvStations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioOffButton" />
+
+    <Spinner
+        android:id="@+id/radioStations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioOnButton" />
 
 
 </android.support.constraint.ConstraintLayout>
