@@ -39,13 +39,17 @@ public class RemoteControl implements Lirc {
     @Override
     public void powerOff() {
             send(AMP, context.getString(R.string.yamPowerOff));
-            //send(RECEIVER, count(2, context.getString(R.string.humPower)));
+            //send(TV, context.getString(R.string.yamPowerOff));
+            send(RECEIVER, context.getString(R.string.humPower));
+            send(RECEIVER, context.getString(R.string.humPower));
     }
 
     @Override
     public void powerOn() {
             send(AMP, context.getString(R.string.yamPowerOn));
             //send(RECEIVER, count(2, context.getString(R.string.humPower)));
+            send(RECEIVER, context.getString(R.string.humPower));
+            send(RECEIVER, context.getString(R.string.humPower));
     }
 
     @Override
@@ -66,7 +70,7 @@ public class RemoteControl implements Lirc {
     }
 
     @Override
-    public void phönix() {
+    public void phoenix() {
        send(RECEIVER, context.getString(R.string.hum1));
        send(RECEIVER, context.getString(R.string.hum6));
     }
@@ -242,18 +246,31 @@ public class RemoteControl implements Lirc {
     }
 
     @Override
-    public void source3() {
-
-    }
-
-    @Override
-    public void source2() {
-
-    }
-
-    @Override
     public void doIt() {
         send(RECEIVER, context.getString(R.string.humOk));
+    }
+
+    @Override
+    public void radioTv() {
+        send(RECEIVER, context.getString(R.string.humRadio));
+    }
+
+    @Override
+    public void radioOn() {
+
+        send(AMP, context.getString(R.string.yamPowerOn));
+        send(RECEIVER, context.getString(R.string.humPower));
+        send(RECEIVER, context.getString(R.string.humPower));
+        send(AMP, context.getString(R.string.yamPowerOn));
+    }
+
+    @Override
+    public void radioOff() {
+
+        send(AMP, context.getString(R.string.yamPowerOff));
+        send(RECEIVER, context.getString(R.string.humPower));
+        send(RECEIVER, context.getString(R.string.humPower));
+        send(AMP, context.getString(R.string.yamPowerOff));
     }
 
     @Override
@@ -266,13 +283,10 @@ public class RemoteControl implements Lirc {
         send(RECEIVER, context.getString(R.string.humChannelDown));
     }
 
-
-
     @Override
     public void volumeUp(){
         send(AMP, context.getString(R.string.yamVolumeUp));
     }
-
 
     private void send(String deviceSring, String commandString){
         String[] sendString = {PRE_STRING, deviceSring, commandString};

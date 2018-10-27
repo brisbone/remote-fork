@@ -12,6 +12,7 @@ package de.uwxy.remote;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,15 +30,16 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MainActivity extends AppCompatActivity {
-    
+
     private static final String TAG = "MAIN_ACTIVITY_DEBUG: ";
     private final String serverUri = "tcp://raspi:1883";
-    private final String PUBLISH_TOPIC = "home/lirc/switch";
+    private final String PUBLISH_TOPIC = "home/entertain/";
     private MqttAndroidClient mqttAndroidClient;
     private String myPubString;
     private final String ON_STRING = "ON";
     private String myMessage;
     Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,27 +68,27 @@ public class MainActivity extends AppCompatActivity {
         Button downButton = findViewById(R.id.downButton);
         Button source2Button = findViewById(R.id.source2Button);
 
-        
+
         doitButton.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                  new RemoteControl(context).volumeDown();
-              }
-          });
+            @Override
+            public void onClick(View v) {
+                new RemoteControl(context).volumeDown();
+            }
+        });
         allOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myPubString = getString(R.string.allOfMqtt);
-                publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                publishMessage(PUBLISH_TOPIC, myPubString);
                 new RemoteControl(context).powerOff();
-             }
+            }
 
         });
         allOnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myPubString = getString(R.string.allOnMqtt);
-                publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                publishMessage(PUBLISH_TOPIC, myPubString);
                 new RemoteControl(context).powerOn();
             }
 
@@ -123,8 +125,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.radioOnMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                new RemoteControl(context).radioOn();
+                //myPubString = getString(R.string.radioOnMqtt);
+                //publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
@@ -132,8 +135,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.radioOffMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                new RemoteControl(context).radioOff();
             }
 
         });
@@ -141,8 +143,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.radioTvMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                new RemoteControl(context).radioTv();
             }
 
         });
@@ -150,8 +151,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.source3Mqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                myPubString = getString(R.string.source3Mqtt);
+                publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
@@ -159,8 +160,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.source2Mqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                myPubString = getString(R.string.source2Mqtt);
+                publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
@@ -168,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.menuMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                myPubString = getString(R.string.menuMqtt);
+                publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
@@ -184,15 +185,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            myPubString = getString(R.string.backMqtt);
-            publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                myPubString = getString(R.string.backMqtt);
+                publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
         leftButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            new RemoteControl(context).guideLeft();
+                new RemoteControl(context).guideLeft();
             }
 
         });
@@ -200,9 +201,9 @@ public class MainActivity extends AppCompatActivity {
         doitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            new RemoteControl(context).doIt();
-            //myPubString = getString(R.string.tagesschauMqtt);
-            //publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                new RemoteControl(context).doIt();
+                //myPubString = getString(R.string.tagesschauMqtt);
+                //publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
             }
 
         });
@@ -233,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myPubString = getString(R.string.source2Mqtt);
-                publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
@@ -242,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 myPubString = getString(R.string.source3Mqtt);
-                publishMessage(PUBLISH_TOPIC + "/" + myPubString, ON_STRING);
+                publishMessage(PUBLISH_TOPIC, myPubString);
             }
 
         });
@@ -256,26 +257,53 @@ public class MainActivity extends AppCompatActivity {
         radioStations.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) {
-                    switch (position) {
-                    case 0: break;
-                    case 1: new RemoteControl(context).rockAntenne(); break;
-                    case 2: new RemoteControl(context).sunshineLive(); break;
-                    case 3: new RemoteControl(context).hrDrei();
-                    case 4: new RemoteControl(context).antenneBayern(); break;
-                    case 5: new RemoteControl(context).hrZwei(); break;
-                    case 6: new RemoteControl(context).hrEins(); break;
-                    case 7: new RemoteControl(context).mdrJump(); break;
-                    case 8: new RemoteControl(context).bayernDrei(); break;
-                    case 9: new RemoteControl(context).youFm(); break;
-                    case 10: new RemoteControl(context).mdrSputnik(); break;
-                    case 11: new RemoteControl(context).brKlassik(); break;
-                    case 12: new RemoteControl(context).brAktuell(); break;
-                    case 13: new RemoteControl(context).hrVier(); break;
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        new RemoteControl(context).rockAntenne();
+                        break;
+                    case 2:
+                        new RemoteControl(context).sunshineLive();
+                        break;
+                    case 3:
+                        new RemoteControl(context).hrDrei();
+                    case 4:
+                        new RemoteControl(context).antenneBayern();
+                        break;
+                    case 5:
+                        new RemoteControl(context).hrZwei();
+                        break;
+                    case 6:
+                        new RemoteControl(context).hrEins();
+                        break;
+                    case 7:
+                        new RemoteControl(context).mdrJump();
+                        break;
+                    case 8:
+                        new RemoteControl(context).bayernDrei();
+                        break;
+                    case 9:
+                        new RemoteControl(context).youFm();
+                        break;
+                    case 10:
+                        new RemoteControl(context).mdrSputnik();
+                        break;
+                    case 11:
+                        new RemoteControl(context).brKlassik();
+                        break;
+                    case 12:
+                        new RemoteControl(context).brAktuell();
+                        break;
+                    case 13:
+                        new RemoteControl(context).hrVier();
+                        break;
                 }
             }
+
             public void onNothingSelected(AdapterView<?> arg0) {
             }
-            });
+        });
 
         final Spinner tvStations = findViewById(R.id.tvStations);
         ArrayAdapter<String> tvStationsArrayAdapter = new ArrayAdapter<>(this
@@ -287,23 +315,47 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View view, int position, long id) {
                 switch (position) {
-                    case 0: break;
-                    case 1: new RemoteControl(context).dasErste(); break;
-                    case 2: new RemoteControl(context).zdf(); break;
-                    case 3: new RemoteControl(context).dreiSat(); break;
-                    case 4: new RemoteControl(context).arte(); break;
-                    case 5: new RemoteControl(context).phönix(); break;
-                    case 6: new RemoteControl(context).tagesschau24(); break;
-                    case 7: new RemoteControl(context).zdfInfo(); break;
-                    case 8: new RemoteControl(context).ardAlpha(); break;
-                    case 9: new RemoteControl(context).one(); break;
-                    case 10: new RemoteControl(context).zdfNeo(); break;
-                    case 11: new RemoteControl(context).hessenDrei(); break;
+                    case 0:
+                        break;
+                    case 1:
+                        new RemoteControl(context).dasErste();
+                        break;
+                    case 2:
+                        new RemoteControl(context).zdf();
+                        break;
+                    case 3:
+                        new RemoteControl(context).dreiSat();
+                        break;
+                    case 4:
+                        new RemoteControl(context).arte();
+                        break;
+                    case 5:
+                        new RemoteControl(context).phoenix();
+                        break;
+                    case 6:
+                        new RemoteControl(context).tagesschau24();
+                        break;
+                    case 7:
+                        new RemoteControl(context).zdfInfo();
+                        break;
+                    case 8:
+                        new RemoteControl(context).ardAlpha();
+                        break;
+                    case 9:
+                        new RemoteControl(context).one();
+                        break;
+                    case 10:
+                        new RemoteControl(context).zdfNeo();
+                        break;
+                    case 11:
+                        new RemoteControl(context).hessenDrei();
+                        break;
                 }
-        }
+            }
+
             public void onNothingSelected(AdapterView<?> arg0) {
             }
-            });
+        });
 
 
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
@@ -317,20 +369,23 @@ public class MainActivity extends AppCompatActivity {
 
                 if (reconnect) {
                     addToHistory("Reconnected to : " + serverURI);
+                    Log.d(TAG, "connected to: " + serverURI);
                     // Because Clean Session is true, we need to re-subscribe
                     //subscribeToTopic(myAboTopic);
                 } else {
                     addToHistory("Connected to: " + serverURI);
+                    Log.d(TAG, "connected to: " + serverURI);
                 }
             }
 
             @Override
             public void connectionLost(Throwable cause) {
                 addToHistory("The SocketToLircConnection was lost.");
+                Log.d(TAG, "The SocketToLircConnection was lost. " + serverUri);
             }
 
             @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
+            public void messageArrived(String topic, MqttMessage message) {
                 String incomingMessage = new String(message.getPayload());
                 addToHistory("Incoming message: " + topic + ": " + incomingMessage);
                 myMessage = topic + ": " + incomingMessage;
@@ -344,6 +399,7 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             addToHistory("Connecting to " + serverUri);
+            Log.d(TAG, "connecting to: " + serverUri);
             mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
@@ -358,52 +414,53 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
                     addToHistory("Failed to connect to: " + serverUri);
+                    Log.d(TAG, "Failed to connect to: " + serverUri);
                 }
             });
 
 
-        } catch (MqttException ex){
+        } catch (MqttException ex) {
             ex.printStackTrace();
         }
 
     }
 
 
-
-    private void addToHistory(String string){
+    private void addToHistory(String string) {
         //connectionHistory.add(string);
         //serverViewVar.setText(string);
         //Log.e(TAG, string);
     }
-/*
-    private void subscribeToTopic(String topic) {
-        try {
-            mqttAndroidClient.subscribe(topic, QOS, null, new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt","Subscribed: " + myAboTopic);
-                }
 
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqtt", "Subscribed fail!");
-                }
-            });
+    /*
+        private void subscribeToTopic(String topic) {
+            try {
+                mqttAndroidClient.subscribe(topic, QOS, null, new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        Log.w("Mqtt","Subscribed: " + myAboTopic);
+                    }
 
-        } catch (MqttException ex) {
-            System.err.println("Exceptionst subscribing");
-            ex.printStackTrace();
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        Log.w("Mqtt", "Subscribed fail!");
+                    }
+                });
+
+            } catch (MqttException ex) {
+                System.err.println("Exceptionst subscribing");
+                ex.printStackTrace();
+            }
         }
-    }
-*/
-    private void publishMessage(String topic, String messageString){
+    */
+    private void publishMessage(String topic, String messageString) {
 
         try {
             MqttMessage message = new MqttMessage();
             message.setPayload(messageString.getBytes());
             mqttAndroidClient.publish(topic, message);
             addToHistory("Message Published: " + topic + " " + message);
-            if(!mqttAndroidClient.isConnected()){
+            if (!mqttAndroidClient.isConnected()) {
                 addToHistory(mqttAndroidClient.getBufferedMessageCount() + " messages in buffer.");
             }
         } catch (MqttException e) {
@@ -411,7 +468,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    
 
 
 }

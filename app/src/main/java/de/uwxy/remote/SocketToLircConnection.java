@@ -10,6 +10,7 @@
 package de.uwxy.remote;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +32,7 @@ public class SocketToLircConnection extends AsyncTask<String,Void,Void>{
             socket = new Socket(LIRC_IP, LIRC_PORT);
             printWriter = new PrintWriter(socket.getOutputStream());
             printWriter.println(command[0] + " " + command[1] + " " + command[2]);
-            //Log.e(LIRC_IP,command[0] + " " + command[1] + " " + command[2]);
+            Log.e(LIRC_IP,command[0] + " " + command[1] + " " + command[2]);
             printWriter.close();
             socket.close();
 
